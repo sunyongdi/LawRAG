@@ -35,12 +35,8 @@ class ChatBotGraph:
             for content in self.vector.query(question, collection_name=collection_name, EmbeddingModel=self.embedding, k=3):
                 sim_query.append(content.key)
                 contents.append(content.value)
-            # content.extend(self.vector.query(question, collection_name=collection_name, EmbeddingModel=self.embedding, k=3))
         if len(contents) == 0:
             return self.llm.chat(sent)
-        
-        # rerank_content = self.reranker.rerank(question, content, k=2)
-        # best_content = rerank_content[0]
         best_content = ''.join(contents)
         prompt = self.llm.generete_prompt(question, best_content)
         final_answers = self.llm.chat(prompt)

@@ -35,8 +35,8 @@ class BaseModel(ABC):
     def chat(self, prompt: str, history: List[dict], content: str) -> str:
         """"""
 
-    def generete_prompt(self, quert: str, content: str) -> str:
-        return PROMPT_TEMPLATE['InternLM_PROMPT_TEMPALTE'].format(question=quert, context=content)
+    def generete_prompt(self, quert: str, content: str, template: str='RAG_PROMPT_TEMPALTE') -> str:
+        return PROMPT_TEMPLATE[template].format(question=quert, context=content)
     
 
 
